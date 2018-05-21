@@ -2,7 +2,7 @@ package BattleShipClasses;
 
 import sun.security.action.GetBooleanAction;
 
-public class ShiptType {
+public class ShipType {
 
 	private enum shiptype
 	{ 
@@ -12,10 +12,9 @@ public class ShiptType {
 		SOS_George,
 		Ninja_Dingy
 	}
-	pu
+	
 	public ShiptType  getShipType(int type ) 
 	{
 		return shiptype[type]
-		
 	}
 }
