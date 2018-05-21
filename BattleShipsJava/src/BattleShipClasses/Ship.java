@@ -1,7 +1,5 @@
 package BattleShipClasses;
 
-import sun.awt.image.IntegerInterleavedRaster;
-import sun.net.www.content.text.plain;
 
 public class Ship {
 
@@ -9,14 +7,21 @@ public class Ship {
 	
 	private int length;
 	
-	private ShiptType type;
+	private ShipType type;
 	
 	private boolean sunk;
 	
 	private String Direction;
 	
-	private int startingPoint;
+	private int startPoint;
 	
+	public Ship() {}
+	
+	//creates a new ship as a set type and automatically assigns it a length
+	public Ship(ShipType type) {
+		this.type = type;
+		this.length = type.getIndex() + 1;
+	}
 	
 	private int[] getPostion() 
 	{
@@ -27,9 +32,9 @@ public class Ship {
 		return this.length;
 	}
 	
-	private ShiptType getShipType() 
+	private String getShipType() 
 	{
-		return type;
+		return type.getName();
 	}
 	
 	private boolean getSunk() 
