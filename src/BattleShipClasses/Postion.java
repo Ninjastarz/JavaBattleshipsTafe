@@ -2,16 +2,18 @@ package BattleShipClasses;
 
 
 public class Postion {
-
+	// variables 
 	private int GridX;
 	private int GridY;
 	private Boolean Hit;
+	// constructor 
 	public Postion(int gridX, int gridY, Boolean hit) {
 		super();
 		GridX = gridX;
 		GridY = gridY;
 		Hit = hit;
 	}
+	// getters and setter 
 	public int getGridX() {
 		return GridX;
 	}

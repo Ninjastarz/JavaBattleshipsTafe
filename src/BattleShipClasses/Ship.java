@@ -2,7 +2,7 @@ package BattleShipClasses;
 
 
 public class Ship {
-
+	//
 	private int length;
 	
 	private ShipType type;
@@ -24,6 +24,7 @@ public class Ship {
 		this.type = type;
 		this.length = type.getIndex() + 2;
 	}
+	// getters and setters 
 	public int getLength() {
 	return length;
 	}
@@ -63,6 +64,7 @@ public class Ship {
 	public void setPostions(Postion[] postions) {
 		Postions = postions;
 	}
+	// sets the positions with its values rather than a array of position
 	public void setPostionsValues(int gridX, int gridY, boolean hit, int arrayPotion) 
 	{	Postions[arrayPotion].setHit(hit);
 		Postions[arrayPotion].setGridY(gridY);

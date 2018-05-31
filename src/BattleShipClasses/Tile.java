@@ -10,10 +10,9 @@ public class Tile {
 	 {
 		
 	 }
-	 
 	 public Tile(boolean guessed, ShipType shipid) 
 	 {
-		this.Guessed = guessed;
+			this.Guessed = guessed;
 	        this.ShipId = shipid;
 	 }
 	 
