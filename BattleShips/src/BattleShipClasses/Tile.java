@@ -4,36 +4,29 @@ public class Tile {
 	
 	 // Variables
 	 private boolean Guessed;
-	 private ShipType ShipId ;
+	 private int ShipId ;
 	 // Constructors
-	 public Tile() 
-	 {
+	 public Tile(){
 		
 	 }
-	 public Tile(boolean guessed, ShipType shipid) 
-	 {
+	 public Tile(boolean guessed, int shipid){
 			this.Guessed = guessed;
 	        this.ShipId = shipid;
 	 }
 	 
 	 //getters and setters
-	 public boolean getGuessed () 
-	 {
+	 public boolean getGuessed () {
 		 return this.Guessed;
 	 }
-	 
-	 public void setGuessed(boolean guessed) 
-	 {
+	 public void setGuessed(boolean guessed) {
 		 this.Guessed = guessed;
-		 
 	 }
-	  public ShipType getShipId() 
+
+	 public int getShipId()
 	 {
 		 return this.ShipId;
 	 }
-	 
-	 public void setShipId(ShipType shipid) 
-	 {
+	 public void setShipId(int shipid){
 		 this.ShipId = shipid;
 		 
 	 }

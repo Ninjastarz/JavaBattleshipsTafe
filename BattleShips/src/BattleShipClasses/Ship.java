@@ -2,16 +2,18 @@ package BattleShipClasses;
 
 
 public class Ship {
-	//
+
+	public int id;
+
 	private int length;
 	
 	private ShipType type;
 	
 	private boolean sunk;
         
-    private String Direction;
+    public String Direction;
 	
-    private Postion[] Postions;
+    private Position[] positions;
 	
 	public Ship() 
     {
@@ -19,14 +21,16 @@ public class Ship {
     }
 	
 	//creates a new ship as a set type and automatically assigns it a length
-	public Ship(ShipType type) 
+	public Ship(ShipType type, int id)
 	{
+		this.id = id;
 		this.type = type;
-		this.length = type.getIndex() + 2;
+		this.length = type.getIndex() + 1;
 	}
-	// getters and setters 
+	// getters and setters
+
 	public int getLength() {
-	return length;
+		return length;
 	}
 	
 	public void setLength(int length) {
@@ -57,18 +61,17 @@ public class Ship {
 		Direction = direction;
 	}
 
-	public Postion[] getPostions() {
-		return Postions;
+	public Position[] getPositions() {
+		return positions;
 	}
 
-	public void setPostions(Postion[] postions) {
-		Postions = postions;
+	public void setPositions(Position[] positions) {
+		this.positions = positions;
 	}
 	// sets the positions with its values rather than a array of position
-	public void setPostionsValues(int gridX, int gridY, boolean hit, int arrayPotion) 
-	{	Postions[arrayPotion].setHit(hit);
-		Postions[arrayPotion].setGridY(gridY);
-		Postions[arrayPotion].setGridX(gridX);
+	public void setPostionsValues(Position position, int arrayPotion)
+	{
+		positions[arrayPotion] = position;
 	}
 	
 	

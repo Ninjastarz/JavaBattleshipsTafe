@@ -1,13 +1,13 @@
 package BattleShipClasses;
 
 
-public class Postion {
+public class Position {
 	// variables 
 	private int GridX;
 	private int GridY;
 	private Boolean Hit;
 	// constructor 
-	public Postion(int gridX, int gridY, Boolean hit) {
+	public Position(int gridX, int gridY, Boolean hit) {
 		super();
 		GridX = gridX;
 		GridY = gridY;
