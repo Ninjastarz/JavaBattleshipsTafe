@@ -4,21 +4,12 @@ package BattleShipClasses;
 public class Ship {
 
 	public int id;
-
 	private int length;
-	
 	private ShipType type;
-	
 	private boolean sunk;
-        
     public String Direction;
-	
     private Position[] positions;
-	
-	public Ship() 
-    {
-            
-    }
+	public Ship(){ }
 	
 	//creates a new ship as a set type and automatically assigns it a length
 	public Ship(ShipType type, int id)

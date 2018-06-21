@@ -1,18 +1,41 @@
 package BattleShipClasses;
 
-
-import java.util.ArrayList;
-
 public class Player {
 	// variables
-	private String Name;
-	private int RemainingShips;
+	protected String Name;
+	protected int RemainingShips;
 	public Ship[] Ships;
-	public GameBoard Game = new GameBoard();
+	public Tile[][] Board;
+	//public GameBoard Game = new GameBoard();
+	protected boolean isCom;
 
 	//creates a new player and populates the ship array with 1 of each ShipType
-	public Player() {
+	public Player(boolean isCom) {
 		Ships = new Ship[5];
+
+		if (isCom){
+			for (int i = 0; i < Ships.length; i++) {
+				Ships[i] = new Ship(ShipType.byIndex(i), i);
+			}
+		}
+
+		setCom(isCom);
+
+		Board = new Tile[10][10];
+
+		for (int x = 0; x < 10; x++) {
+			for (int y = 0; y < 10; y++) {
+				Board[x][y] = new Tile();
+			}
+		}
+	}
+
+	public boolean isCom() {
+		return isCom;
+	}
+
+	public void setCom(boolean com) {
+		isCom = com;
 	}
 
 	// method for checking if a player has lost
@@ -54,90 +77,8 @@ public class Player {
 			}
 		}
 		// if all the ship have had all positions have been hit
-		if (totalShipsDestroyed == totalShipCount) {
-			// YOU LOSE
-			return true;
-		} else {
-			return false;
+		// YOU LOSE
+		return totalShipsDestroyed == totalShipCount;
 
-		}
-
-	}
-
-
-	//Method for placing ship on game board(gets ship )
-	public boolean placeShip(Ship ship, int x, int y) {
-		try {
-			// variables
-			int length = ship.getLength();
-			String direction = ship.Direction;
-			ArrayList<Position> positionArrayList = new ArrayList<>();
-			ArrayList<Ship> shipArrayList = new ArrayList<>();
-
-			// Get the tile
-			Tile tile = Game.getPlayerBoard()[x][y];
-
-			// if tile is not null and has a ship
-			if (tile == null) return false;
-			if (tile.getShipId() != 0) return false;
-
-			// We have an empty tile, let's see if we can place the ship starting from here.
-			// If the direction is up, check that we have enough room above it
-			if (direction == "Up") {
-				if (y - (length) >= 0) { // check if ship can go up
-					for (int i = y; i > (y - length); i--) {
-						if (Game.getPlayerBoard()[x][i].getShipId() != 0) return false;
-					}
-					for (int i = y; i > (y - length); i--) {
-						Game.getPlayerBoard()[x][i].setShipId(ship.id);
-						positionArrayList.add(new Position(x, i, false));
-					}
-
-				} else {                            //There’s no room upwards, so put it downwards
-
-					for (int i = y; i < (y + length); i++) {
-						if (Game.getPlayerBoard()[x][i].getShipId() != 0) {
-							return false;
-						}
-					}
-					for (int i = y; i < (y + length); i++) {
-						Game.getPlayerBoard()[x][i].setShipId(ship.id);
-						positionArrayList.add(new Position(x, i, false));
-					}
-				}
-			} else { // the direction is right
-				if (x - length <= 9) { // check if ship can go right
-					for (int a = x; a > x - length; a--) {
-						if (Game.getPlayerBoard()[a][y].getShipId() != 0) return false;
-					}
-					for (int a = x; a > x - length; a--) {
-						Game.getPlayerBoard()[a][y].setShipId(ship.id);
-						positionArrayList.add(new Position(a, y, false));
-					}
-				} else { // there's no room right, so put it left
-					for (int a = x; a < x + length; a++) {
-						if (Game.getPlayerBoard()[a][y].getShipId() != 0) return false;
-					}
-					for (int a = x; a < x + length; a++) {
-						Game.getPlayerBoard()[a][y].setShipId(ship.id);
-						positionArrayList.add(new Position(a, y, false));
-					}
-				}
-			}
-			// set ships positions array to positions
-			ship.setPositions(positionArrayList.toArray(new Position[]{}));
-
-			// add existing ships to arraylist ships
-			for (Ship s : Ships) {
-				shipArrayList.add(s);
-			}
-			// add current ship
-			shipArrayList.add(ship);
-			// set ship array to ship arraylist
-			Ships = shipArrayList.toArray(Ships);
-			return true;
-		} catch (ArrayIndexOutOfBoundsException ex){
-			return false;
-		}
 	}
 }

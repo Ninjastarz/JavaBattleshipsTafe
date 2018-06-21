@@ -25,10 +25,12 @@ public class myShips implements Initializable {
             I1, I2, I3, I4, I5, I6, I7, I8, I9, I10,
             J1, J2, J3, J4, J5, J6, J7, J8, J9, J10;
 
+    public static GameBoard gameBoard;
     public static Player player;
 
     public myShips(){
-        player = new Player();
+        gameBoard = new GameBoard(false);
+        player = gameBoard.Current;
     }
 
     @Override
@@ -56,7 +58,6 @@ public class myShips implements Initializable {
 
     public void showShips(){
         placeShips();
-        GameBoard gameBoard = player.Game;
         Tile[][] playerBoard = gameBoard.getPlayerBoard();
 
         //Get the GameBoard.PlayerBoard and reset the scene
@@ -149,7 +150,7 @@ public class myShips implements Initializable {
                     break;
             }
 
-            if (player.placeShip(ship, x, y))  {
+            if (gameBoard.placeShip(ship, x, y, player))  {
                 NoShips--;
             }
         }

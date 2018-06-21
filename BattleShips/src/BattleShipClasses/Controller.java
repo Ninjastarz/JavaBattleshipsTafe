@@ -35,9 +35,11 @@ public class Controller implements Initializable{
     private Button[] buttons;
     private int Hits = 0, Misses = 0, Shots = 0;
     public Player player;
+    public GameBoard gameBoard;
 
     public Controller() {
-        player = myShips.player;
+        gameBoard = new GameBoard(false);
+        player = gameBoard.Current;
         if (buttons == null) {
             buttons = new Button[100];
         }
@@ -341,28 +343,14 @@ public class Controller implements Initializable{
     }
 
     public int getIdOfShipAtLocation(int x, int y) {
-        GameBoard gameBoard = player.Game;
-        Tile[][] playerBoard = gameBoard.getPlayerBoard();
-        Tile tile = playerBoard[x][y];
+        Tile[][] cpuBoard = gameBoard.getCPUBoard();
+        Tile tile = cpuBoard[x][y];
         int shipId = tile.getShipId();
 
         if (shipId != 0) {
             Button button = getButtonAtPosition(x, y);
             if (button != null) {
-
-                for (Ship ship: player.Ships) {
-                    if (ship != null){
-                        for (Position pos: ship.getPositions()) {
-                            if (pos.getGridX() == x && pos.getGridY() == y) {
-                                pos.setHit(true);
-                            }
-                        }
-                    }
-                }
-
-
-                tile.setGuessed(true);
-                return shipId;
+                return gameBoard.Guess(x, y, gameBoard.Opponent, tile);
             }
         }
         return -1;
@@ -403,6 +391,8 @@ public class Controller implements Initializable{
                     case 1: button.setStyle("-fx-background-color: blue");
                         break;
                 }
+
+
 
                 hits.setText(Integer.toString(++Hits));
                 misses.setText(Integer.toString(Misses));
